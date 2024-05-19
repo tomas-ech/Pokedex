@@ -1,18 +1,20 @@
 import { IconWorldSearch } from "@tabler/icons-react"
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import PokemonList from "./PokemonList"
 
 export const Pokemon = () => {
 
-  //      const [allPokemon, setallPokemon] = useState([])
+  const [allPokemon, setallPokemon] = useState([])
 
   // //     //efecto con arreglo vacio que se renderiza luego del primer render
-  //      useEffect( () => {
-  //          axios.get("https://pokeapi.co/api/v2/pokemon?limit=151"). //el ?limit=150 es para la paginación, por defecto esta paginado a 20 elementos, aquí rompemos eso para pedir 150 de golpe
-  //          then(( {data} ) => setallPokemon(data.results)).
-  //          catch((err) => console.log(err));
-  //         }, [])
+       useEffect( () => {
+           axios.get("https://pokeapi.co/api/v2/pokemon?limit=151"). //el ?limit=150 es para la paginación, por defecto esta paginado a 20 elementos, aquí rompemos eso para pedir 150 de golpe
+           then(( {data} ) => setallPokemon(data.results)).
+           catch((err) => console.log(err));
+          }, [])
 
+          
   //         //  //Usar {} debtro del parentesis de then desestructuraliza el objeto y saca la variable con el nombre dado, en este caso se evita poner la versión larga then(( obj ) => console.log(obj.data)).
 
   return (
@@ -29,6 +31,7 @@ export const Pokemon = () => {
           </button>
         </div>
       </form>
+      <PokemonList pokemons={allPokemon} />
     </section>
   )
 }
